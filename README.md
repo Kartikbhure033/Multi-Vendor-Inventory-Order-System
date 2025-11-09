@@ -1,193 +1,204 @@
-# Multi-Vendor-Inventory-Order-SystemA clean,This project is a simple online shopping web application built using the MERN stack (MongoDB, Express, React, Node). There are two types of users: regular users who can browse products and place orders, and vendors who can add and manage products. When a user places an order, the vendor can mark it as completed or cancel it. The system also updates product stock automatically to keep everything accurate.
+Multi-Vendor Inventory & Order System (MERN Stack)
 
-This README is written so anyone can clone from GitHub and run it end‑to‑end in minutes on macOS/Windows/Linux.
+A clean and simple multi-vendor online shopping web application built using the MERN stack (MongoDB, Express.js, React, Node.js).
 
-1) Quick Start (Clone → Run)
-# 1) Clone the repo
-git clone <YOUR_GITHUB_REPO_URL> 
+This project enables two types of users:
+
+Users – Browse products, place orders, and track their order status.
+
+Vendors – Add, edit, and manage their products and handle customer orders.
+
+When a user places an order, the vendor can mark it as completed or cancelled.
+The system automatically updates product stock in real time to ensure accurate inventory management.
+
+🚀 Quick Start (Clone → Run)
+1️⃣ Clone the Repository
+git clone <YOUR_GITHUB_REPO_URL>
 cd myshop
 
-
-# 2) Start backend
+2️⃣ Setup & Start Backend
 cd server
-cp .env.example .env   # create env file from example
-npm i
-npm run dev            # or: npm start
+cp .env.example .env   # Create environment file
+npm install
+npm run dev            # For development (nodemon)
+# or
+npm start              # For production
 
-
-# 3) Seed sample data (3 vendors, 10 products)
+3️⃣ Seed Sample Data
 node seed/seed.js
 
 
-# 4) Start frontend (in a new terminal)
+Seeds 3 vendors and 10 products.
+
+4️⃣ Setup & Start Frontend
+
+Open a new terminal:
+
 cd ../client
-cp .env.example .env   # create env file from example
-npm i
+cp .env.example .env   # Create environment file
+npm install
 npm run dev
 
+5️⃣ Open the App
 
-# 5) Open the app
-# Frontend: http://localhost:5173
-# Backend API: http://localhost:5000/api
+Frontend: http://localhost:5173
 
-Seeded vendor logins (password for all = password123):
+Backend API: http://localhost:5000/api
 
-alpha@shop.com
+🔑 Seeded Vendor Accounts
 
-beta@shop.com
+You can log in using the following vendor accounts (password for all = password123):
 
-cosmic@shop.com
+Vendor Name	Email
+Alpha Shop	alpha@shop.com
 
-2) Project Structure
+Beta Store	beta@shop.com
+
+Cosmic Mart	cosmic@shop.com
+🗂️ Project Structure
 myshop/
-├─ server/                      # Node/Express API
-│  ├─ models/                   # Mongoose models (User, Product, Order)
-│  ├─ routes/                   # auth, products, orders, vendor
-│  ├─ middleware/               # auth (JWT), roles
-│  ├─ seed/seed.js              # seeder script
-│  ├─ server.js                 # app entry
-│  ├─ package.json
-│  ├─ .env.example              # backend env template
-│  └─ README-backend.md (opt)
-└─ client/                      # React (Vite)
-   ├─ src/                      # components/pages
-   ├─ vite.config.js
-   ├─ package.json
-   ├─ .env.example              # frontend env template
-   └─ README-frontend.md (opt)
-3) Requirements
+├── server/                     # Node/Express Backend
+│   ├── models/                 # Mongoose models (User, Product, Order)
+│   ├── routes/                 # Routes for auth, products, orders, vendors
+│   ├── middleware/             # Auth middleware (JWT, role-based)
+│   ├── seed/seed.js            # Seeder script
+│   ├── server.js               # Backend entry point
+│   ├── package.json
+│   ├── .env.example            # Backend environment template
+│   └── README-backend.md       # (Optional)
+│
+└── client/                     # React (Vite) Frontend
+    ├── src/                    # Components and pages
+    ├── vite.config.js
+    ├── package.json
+    ├── .env.example            # Frontend environment template
+    └── README-frontend.md      # (Optional)
 
-Node.js >= 18 and npm >= 9 (or yarn/pnpm)
+⚙️ Requirements
 
-MongoDB running locally or MongoDB Atlas connection string
+Node.js: ≥ 18
 
-Ports 5000 (API) and 5173 (Vite) available
+npm: ≥ 9
 
-4) Environment Variables
+MongoDB: Local or Atlas connection
+
+Available Ports: 5000 (Backend) & 5173 (Frontend)
+
+🌍 Environment Variables
 server/.env.example
 PORT=5000
 MONGO_URI=mongodb://127.0.0.1:27017/myshop
 JWT_SECRET=super_secret_change_me
 CLIENT_ORIGIN=http://localhost:5173
 
-CLIENT_ORIGIN must match your frontend URL.
 
-In dev, cookies are set with httpOnly, sameSite=lax, secure=false (see code). In production use secure=true & sameSite=none over HTTPS.
+⚠️ Ensure CLIENT_ORIGIN matches your frontend URL.
 
 client/.env.example
 VITE_API_BASE=http://localhost:5000/api
 
-After copying .env.example to .env, adjust values as needed.
+🧩 Available Scripts
+Backend (Server)
+Command	Description
+npm run dev	Start API with hot reload (nodemon)
+npm start	Start API without nodemon
+node seed/seed.js	Seed database with sample data
+Frontend (Client)
+Command	Description
+npm run dev	Start Vite development server
+npm run build	Build production version
+npm run preview	Preview production build locally
+🧭 How to Use (Step-by-Step)
+👤 User Flow
 
-5) Scripts
-Backend (server)
+Register a new account and select the role: User.
 
-npm run dev – Start API with nodemon (hot reload)
+Browse products and place an order.
 
-npm start – Start API without nodemon
+View order status under My Orders (auto-updates when vendor takes action).
 
-node seed/seed.js – Seed database (3 vendors, 10 products)
+🏪 Vendor Flow
 
-Frontend (client)
+Log in or register as a Vendor.
 
-npm run dev – Start Vite dev server
+Go to Vendor Dashboard → Manage your Products (Add/Edit/Delete).
 
-npm run build – Production build
+Handle Orders → Mark as Fulfilled or Cancelled.
 
-npm run preview – Preview the build locally
+Cancelling automatically restocks the product.
 
-6) How to Use (Happy Path)
-
-Register a new account (choose role: user or vendor). You’ll be logged in automatically (JWT httpOnly cookie).
-
-User flow
-
-Visit Products → choose a product → Place Order (stock checked, vendor self‑buy prevented).
-
-Check My Orders for status. (Vendor actions update it.)
-
-Vendor flow
-
-Vendor Dashboard → Products: Create/Edit/Delete products.
-
-Vendor Dashboard → Orders: See new orders → Fulfill or Cancel. Cancelling auto‑restocks product.
-
-7) API (High‑level)
+🧠 API Overview (High-Level)
 
 Base URL: http://localhost:5000/api
 
-Auth (cookie‑based)
+🔐 Auth (Cookie-Based)
+Method	Endpoint	Description
+POST	/auth/register	Register new user or vendor
+POST	/auth/login	Login user/vendor
+POST	/auth/logout	Logout
+GET	/auth/me	Get current user info
+🛍️ Products
+Method	Endpoint	Description
+GET	/products	Get all products
+GET	/products/stock?ids=<id,id,...>	Get real-time stock info
+📦 Orders (User)
+Method	Endpoint	Description
+POST	/orders	Place an order
+GET	/orders/me	View your orders
+🧾 Vendor
+Method	Endpoint	Description
+GET	/vendor/me/products	View vendor’s products
+POST	/vendor/me/products	Add new product
+PATCH	/vendor/me/products/:id	Edit product
+DELETE	/vendor/me/products/:id	Delete product
+GET	/vendor/me/orders	View vendor’s orders
+PATCH	/vendor/me/orders/:id	Update order status (fulfilled/cancelled)
 
-POST /auth/register { name, email, password, role: "user"|"vendor" }
+⚠️ Note: No Authorization header required — JWT is stored securely in an httpOnly cookie.
 
-POST /auth/login { email, password }
+✅ Verifying the Setup
 
-POST /auth/logout
+Register & Login → Cookie appears in browser (not accessible via JS).
 
-GET /auth/me
+View seeded products → Stocks auto-update in real-time.
 
-Public Products
+Place order → Status updates correctly.
 
-GET /products
+Vendor accounts can manage products & update orders.
 
-GET /products/stock?ids=<id,id,...> → real‑time stock map
+🧰 Troubleshooting
+❌ Unauthenticated After Login
 
-Orders (user)
+Ensure:
 
-POST /orders { productId, quantity }
+Axios includes withCredentials: true
 
-GET /orders/me
+Backend CORS allows credentials: true and correct origin.
 
-Vendor
+⚠️ CORS Errors
 
-GET /vendor/me/products
+Update CLIENT_ORIGIN in .env.
 
-POST /vendor/me/products
+Ensure CORS config matches frontend URL.
 
-PATCH /vendor/me/products/:id
+🧩 MongoDB Connection Fails
 
-DELETE /vendor/me/products/:id
+Verify MongoDB is running.
 
-GET /vendor/me/orders
+Check MONGO_URI in .env.
 
-PATCH /vendor/me/orders/:id { status: "fulfilled" | "cancelled" }
+🔒 Cookies Over HTTPS
 
-No Authorization header required: the JWT is stored in an httpOnly cookie.
+Set secure=true and sameSite=none for production over HTTPS.
 
-8) Verifying the Setup
+Tech Stack
 
-Open http://localhost:5173 and ensure you can:
+Frontend: React + Vite + Axios
 
-Register & login (cookie appears in the browser, not visible to JS).
+Backend: Node.js + Express.js + JWT Auth
 
-See seeded products; polling keeps stock fresh.
+Database: MongoDB (Mongoose ORM)
 
-Place an order as a user; view it in My Orders.
+Authentication: Cookie-based JWT
 
-Switch to a seeded vendor account; manage products & update order statuses.
-
-9) Troubleshooting
-
-Unauthenticated after login
-
-Ensure frontend Axios uses withCredentials: true and backend CORS has credentials: true and the correct origin.
-
-CORS errors
-
-Update CLIENT_ORIGIN in server/.env and the cors({ origin, credentials }) config to match UI URL.
-
-Mongo connection fails
-
-Check that MongoDB is running and MONGO_URI is correct.
-
-Cookies in HTTPS
-
-Use secure=true and sameSite=none in production with TLS; ensure frontend and backend are on trusted origins.
-
-10) Production Deployment (Brief)
-
-Backend: Deploy to Render/Railway/EC2; set env vars; allow your frontend origin via CORS; enable secure cookies.
-
-Frontend: Build with npm run build and deploy the dist/ folder to Vercel/Netlify/Static host. Set VITE_API_BASE to the deployed API URL.
-
-MongoDB: Use MongoDB Atlas and set MONGO_URI accordingly.
+Deployment: Vercel (frontend), Render/Railway (backend)
